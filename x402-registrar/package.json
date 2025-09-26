@@ -1,0 +1,31 @@
+{
+  "name": "x402-registrar",
+  "version": "1.0.0",
+  "main": "dist/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -p tsconfig.json",
+    "start": "npm run build && node dist/server.js",
+    "dev": "ts-node server.ts",
+    "dev:client": "ts-node client.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "viem": "^2.21.22",
+    "x402-axios": "^0.6.5",
+    "x402-express": "^0.6.5"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.5.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}
