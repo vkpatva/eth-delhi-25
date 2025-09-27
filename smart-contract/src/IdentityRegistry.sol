@@ -25,8 +25,8 @@ contract AgentRegistry is IAgentRegistry, EIP712 {
     string public constant VERSION = "1.0.0";
     string private constant SIGNING_DOMAIN = "AgentRegistry";
     string private constant SIGNATURE_VERSION = "1";
-    uint256 private constant REGISTRATION_FEE = 0.01 ether;
-
+    // uint256 private constant REGISTRATION_FEE = 0.01 ether;
+    uint256 private REGISTRATION_FEE;
     // ============ EIP-712 Typehash ============
     bytes32 private constant AGENT_TYPEHASH =
         keccak256(
@@ -41,9 +41,14 @@ contract AgentRegistry is IAgentRegistry, EIP712 {
     mapping(string => uint256) private _didToAgentId; // For DID uniqueness
     mapping(address => uint256) public nonces;
 
-    constructor(address validator) EIP712(SIGNING_DOMAIN, SIGNATURE_VERSION) {
+    constructor(
+        address validator,
+        uint decimals // = 1
+    ) EIP712(SIGNING_DOMAIN, SIGNATURE_VERSION) {
         require(validator != address(0), "Invalid DIDValidator address");
         didValidator = IDIDValidator(validator);
+        //  10 ^ 4 = 10000
+        REGISTRATION_FEE = (1 * 10) ^ decimals;
     }
 
     /**

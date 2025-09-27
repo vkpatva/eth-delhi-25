@@ -22,23 +22,28 @@ contract Deploy is Script {
         console.log("Deployer:", vm.addr(deployerPrivateKey));
 
         // 1. Deploy DIDValidator
-        // console.log("\n1. Deploying DIDValidator...");
-        // DIDValidator didValidator = new DIDValidator();
-        // console.log("DIDValidator deployed at:", address(didValidator));
-        address DIDValidator = address(
-            0x2846653CCc036Db6F1dB305b2665c1d11F9d9381
-        );
+        console.log("\n1. Deploying DIDValidator...");
+        DIDValidator didValidator = new DIDValidator();
+        console.log("DIDValidator deployed at:", address(didValidator));
+        // address DIDValidator = address(
+        //     0x2846653CCc036Db6F1dB305b2665c1d11F9d9381
+        // );
+
+        // for hedera - it should be 6
+        // for amoy - it should be 16
+        // for og - it should be 16
         // 2. Deploy IdentityRegistry with DIDValidator dependency
         console.log("\n2. Deploying IdentityRegistry...");
         AgentRegistry identityRegistry = new AgentRegistry(
-            address(DIDValidator)
+            address(didValidator),
+            16
         );
         console.log("IdentityRegistry deployed at:", address(identityRegistry));
 
         vm.stopBroadcast();
 
         console.log("\n=== Deployment Summary ===");
-        console.log("DIDValidator:", address(DIDValidator));
+        console.log("DIDValidator:", address(didValidator));
         console.log("IdentityRegistry:", address(identityRegistry));
     }
 }
