@@ -26,11 +26,11 @@ api
     chainId: 1,
     address: "0x1234567890123456789012345678901234567890",
   })
-  .then((response) => {
+  .then(async (response) => {
     console.log("inside api");
     console.log(response.data);
 
-    const paymentResponse = decodeXPaymentResponse(
+    const paymentResponse = await decodeXPaymentResponse(
       response.headers["x-payment-response"]
     );
     console.log("inside payment response");

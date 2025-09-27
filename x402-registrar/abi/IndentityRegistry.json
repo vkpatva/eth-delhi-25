@@ -1,0 +1,402 @@
+{
+    "abi": [
+        {
+            "type": "constructor",
+            "inputs": [
+                {
+                    "name": "validator",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "VERSION",
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "string",
+                    "internalType": "string"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "didValidator",
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "address",
+                    "internalType": "contract IDIDValidator"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "eip712Domain",
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "fields",
+                    "type": "bytes1",
+                    "internalType": "bytes1"
+                },
+                {
+                    "name": "name",
+                    "type": "string",
+                    "internalType": "string"
+                },
+                {
+                    "name": "version",
+                    "type": "string",
+                    "internalType": "string"
+                },
+                {
+                    "name": "chainId",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "verifyingContract",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "salt",
+                    "type": "bytes32",
+                    "internalType": "bytes32"
+                },
+                {
+                    "name": "extensions",
+                    "type": "uint256[]",
+                    "internalType": "uint256[]"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getAgentByAddress",
+            "inputs": [
+                {
+                    "name": "agent",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "tuple",
+                    "internalType": "struct IAgentRegistry.AgentInfo",
+                    "components": [
+                        {
+                            "name": "did",
+                            "type": "string",
+                            "internalType": "string"
+                        },
+                        {
+                            "name": "id",
+                            "type": "uint256",
+                            "internalType": "uint256"
+                        },
+                        {
+                            "name": "description",
+                            "type": "string",
+                            "internalType": "string"
+                        },
+                        {
+                            "name": "serviceEndpoint",
+                            "type": "string",
+                            "internalType": "string"
+                        }
+                    ]
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getAgentById",
+            "inputs": [
+                {
+                    "name": "agentId",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "tuple",
+                    "internalType": "struct IAgentRegistry.AgentInfo",
+                    "components": [
+                        {
+                            "name": "did",
+                            "type": "string",
+                            "internalType": "string"
+                        },
+                        {
+                            "name": "id",
+                            "type": "uint256",
+                            "internalType": "uint256"
+                        },
+                        {
+                            "name": "description",
+                            "type": "string",
+                            "internalType": "string"
+                        },
+                        {
+                            "name": "serviceEndpoint",
+                            "type": "string",
+                            "internalType": "string"
+                        }
+                    ]
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getAgentDID",
+            "inputs": [
+                {
+                    "name": "agent",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "string",
+                    "internalType": "string"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getAgentServiceEndpoint",
+            "inputs": [
+                {
+                    "name": "agent",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "string",
+                    "internalType": "string"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "nonces",
+            "inputs": [
+                {
+                    "name": "",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "registerAgent",
+            "inputs": [
+                {
+                    "name": "did",
+                    "type": "string",
+                    "internalType": "string"
+                },
+                {
+                    "name": "description",
+                    "type": "string",
+                    "internalType": "string"
+                },
+                {
+                    "name": "serviceEndpoint",
+                    "type": "string",
+                    "internalType": "string"
+                }
+            ],
+            "outputs": [],
+            "stateMutability": "payable"
+        },
+        {
+            "type": "function",
+            "name": "registerAgentWithSig",
+            "inputs": [
+                {
+                    "name": "request",
+                    "type": "tuple",
+                    "internalType": "struct IAgentRegistry.ForwardRequest",
+                    "components": [
+                        {
+                            "name": "agent",
+                            "type": "address",
+                            "internalType": "address"
+                        },
+                        {
+                            "name": "did",
+                            "type": "string",
+                            "internalType": "string"
+                        },
+                        {
+                            "name": "description",
+                            "type": "string",
+                            "internalType": "string"
+                        },
+                        {
+                            "name": "serviceEndpoint",
+                            "type": "string",
+                            "internalType": "string"
+                        },
+                        {
+                            "name": "nonce",
+                            "type": "uint256",
+                            "internalType": "uint256"
+                        },
+                        {
+                            "name": "expiry",
+                            "type": "uint256",
+                            "internalType": "uint256"
+                        }
+                    ]
+                },
+                {
+                    "name": "signature",
+                    "type": "bytes",
+                    "internalType": "bytes"
+                }
+            ],
+            "outputs": [],
+            "stateMutability": "payable"
+        },
+        {
+            "type": "function",
+            "name": "updateServiceEndpoint",
+            "inputs": [
+                {
+                    "name": "newEndpoint",
+                    "type": "string",
+                    "internalType": "string"
+                }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "event",
+            "name": "AgentRegistered",
+            "inputs": [
+                {
+                    "name": "agent",
+                    "type": "address",
+                    "indexed": true,
+                    "internalType": "address"
+                },
+                {
+                    "name": "did",
+                    "type": "string",
+                    "indexed": false,
+                    "internalType": "string"
+                },
+                {
+                    "name": "agentId",
+                    "type": "uint256",
+                    "indexed": true,
+                    "internalType": "uint256"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "event",
+            "name": "EIP712DomainChanged",
+            "inputs": [],
+            "anonymous": false
+        },
+        {
+            "type": "event",
+            "name": "ServiceEndpointUpdated",
+            "inputs": [
+                {
+                    "name": "agentId",
+                    "type": "uint256",
+                    "indexed": true,
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "newEndpoint",
+                    "type": "string",
+                    "indexed": false,
+                    "internalType": "string"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "error",
+            "name": "ECDSAInvalidSignature",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "ECDSAInvalidSignatureLength",
+            "inputs": [
+                {
+                    "name": "length",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ]
+        },
+        {
+            "type": "error",
+            "name": "ECDSAInvalidSignatureS",
+            "inputs": [
+                {
+                    "name": "s",
+                    "type": "bytes32",
+                    "internalType": "bytes32"
+                }
+            ]
+        },
+        {
+            "type": "error",
+            "name": "InvalidShortString",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "StringTooLong",
+            "inputs": [
+                {
+                    "name": "str",
+                    "type": "string",
+                    "internalType": "string"
+                }
+            ]
+        }
+    ]
+}
