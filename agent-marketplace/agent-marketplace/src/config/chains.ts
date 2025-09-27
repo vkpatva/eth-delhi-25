@@ -23,19 +23,16 @@ export const CHAINS: Record<string, ChainConfig> = {
   hederaTestnet: {
     id: 296, // Hedera Testnet chain ID
     name: "Hedera Testnet",
-    rpcUrl:
-      process.env.NEXT_PUBLIC_HEDERA_RPC_URL || "https://testnet.hashio.io/api",
-    contractAddress: process.env.NEXT_PUBLIC_HEDERA_CONTRACT_ADDRESS || "",
+    rpcUrl: "https://testnet.hashio.io/api",
+    contractAddress: "0x0E8095137f57BE708A130D264874B91737C12fe4",
     explorerUrl: "https://hashscan.io/testnet",
     testnet: true,
   },
   ogTestNet: {
     id: 16602,
     name: "OG Testnet",
-    rpcUrl:
-      process.env.NEXT_PUBLIC_OG_TESTNET_RPC_URL ||
-      "https://evmrpc-testnet.0g.ai",
-    contractAddress: process.env.NEXT_PUBLIC_OG_TESTNET_CONTRACT_ADDRESS || "",
+    rpcUrl: "https://evmrpc-testnet.0g.ai",
+    contractAddress: "0x73697bc046072064eb5bcd0d30bd47ec92b1ea0e",
     explorerUrl: "https://evmtestnet.0g.ai",
     testnet: true,
   },
