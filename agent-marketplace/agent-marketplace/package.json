@@ -1,0 +1,27 @@
+{
+  "name": "agent-marketplace",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "15.5.4",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@ethersproject/abi": "^5.7.0",
+    "@ethersproject/contracts": "^5.7.0",
+    "@ethersproject/providers": "^5.7.2",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20.19.17",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "ethers": "^5.7.2",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
