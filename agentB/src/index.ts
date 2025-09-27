@@ -30,6 +30,9 @@ app.post("/agent", async (req, res) => {
   }
 });
 
+app.get("/health", (req, res) => {
+  res.send("OK");
+});
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });

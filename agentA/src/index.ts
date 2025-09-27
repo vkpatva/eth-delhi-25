@@ -24,6 +24,10 @@ app.post("/agent", async (req, res) => {
   }
 });
 
+app.get("/health", (req, res) => {
+  res.send("OK");
+});
+
 app.listen(8001, () => {
   console.log("Writer agent running on http://localhost:8001");
 });
