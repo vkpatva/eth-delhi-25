@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@zkred/agent-id": "^0.0.7"
+  }
+}
