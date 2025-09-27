@@ -35,8 +35,7 @@ contract Deploy is Script {
         // 2. Deploy IdentityRegistry with DIDValidator dependency
         console.log("\n2. Deploying IdentityRegistry...");
         AgentRegistry identityRegistry = new AgentRegistry(
-            address(didValidator),
-            16
+            address(didValidator)
         );
         console.log("IdentityRegistry deployed at:", address(identityRegistry));
 

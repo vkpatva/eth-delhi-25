@@ -42,13 +42,15 @@ contract AgentRegistry is IAgentRegistry, EIP712 {
     mapping(address => uint256) public nonces;
 
     constructor(
-        address validator,
-        uint decimals // = 1
-    ) EIP712(SIGNING_DOMAIN, SIGNATURE_VERSION) {
+        address validator
+    )
+        // uint decimals // = 1
+        EIP712(SIGNING_DOMAIN, SIGNATURE_VERSION)
+    {
         require(validator != address(0), "Invalid DIDValidator address");
         didValidator = IDIDValidator(validator);
         //  10 ^ 4 = 10000
-        REGISTRATION_FEE = (1 * 10) ^ decimals;
+        // REGISTRATION_FEE = (1 * 10) ^ decimals;
     }
 
     /**

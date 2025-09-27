@@ -11,18 +11,33 @@ export const CHAINS: Record<string, ChainConfig> = {
   polygonAmoy: {
     id: 80002,
     name: "Polygon Amoy",
-    rpcUrl: process.env.NEXT_PUBLIC_POLYGON_RPC_URL || "https://polygon-amoy-bor.publicnode.com",
-    contractAddress: process.env.NEXT_PUBLIC_POLYGON_CONTRACT_ADDRESS || "0xF663447E650A3bcdc041A4dD00c2cD88a1B19bB6",
+    rpcUrl:
+      process.env.NEXT_PUBLIC_POLYGON_RPC_URL ||
+      "https://polygon-amoy-bor.publicnode.com",
+    contractAddress:
+      process.env.NEXT_PUBLIC_POLYGON_CONTRACT_ADDRESS ||
+      "0xF663447E650A3bcdc041A4dD00c2cD88a1B19bB6",
     explorerUrl: "https://amoy.polygonscan.com",
-    testnet: true
+    testnet: true,
   },
   hederaTestnet: {
     id: 296, // Hedera Testnet chain ID
     name: "Hedera Testnet",
-    rpcUrl: process.env.NEXT_PUBLIC_HEDERA_RPC_URL || "https://testnet.hashio.io/api",
+    rpcUrl:
+      process.env.NEXT_PUBLIC_HEDERA_RPC_URL || "https://testnet.hashio.io/api",
     contractAddress: process.env.NEXT_PUBLIC_HEDERA_CONTRACT_ADDRESS || "",
     explorerUrl: "https://hashscan.io/testnet",
-    testnet: true
+    testnet: true,
+  },
+  ogTestNet: {
+    id: 16602,
+    name: "OG Testnet",
+    rpcUrl:
+      process.env.NEXT_PUBLIC_OG_TESTNET_RPC_URL ||
+      "https://evmrpc-testnet.0g.ai",
+    contractAddress: process.env.NEXT_PUBLIC_OG_TESTNET_CONTRACT_ADDRESS || "",
+    explorerUrl: "https://evmtestnet.0g.ai",
+    testnet: true,
   },
 };
 
