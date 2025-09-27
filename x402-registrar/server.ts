@@ -77,6 +77,11 @@ app.post("/register", async (req: Request, res: Response) => {
   });
 });
 
+
+app.get("/health", (req, res) => {
+  res.send("OK");
+});
+
 app.listen(4020, () => {
   console.log(`⚡ Server running at http://localhost:4020`);
 });

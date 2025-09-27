@@ -4,7 +4,7 @@ COPY package*.json ./
 RUN npm install
 RUN npm i @zkred/agent-id -f
 COPY . .
-RUN npm run build
-EXPOSE 8002
-CMD ["node", "dist/index.js"]
+EXPOSE 4020
+CMD ["npm", "run", "start"]
+
 

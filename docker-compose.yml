@@ -9,6 +9,8 @@ services:
       - "8001:8001"
     restart: always
     working_dir: /app
+    env_file:
+      - ./agentA/.env
     healthcheck:
       test: ["CMD", "wget", "--spider", "-q", "http://localhost:8001/health"]
       interval: 30s
@@ -25,8 +27,28 @@ services:
       - "8002:8002"
     restart: always
     working_dir: /app
+    env_file:
+      - ./agentB/.env
     healthcheck:
       test: ["CMD", "wget", "--spider", "-q", "http://localhost:8002/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  x402:
+    container_name: x402-registrar
+    build:
+      context: ./x402-registrar
+      dockerfile: dockerfile
+    ports:
+      - "4020:4020"
+    restart: always
+    working_dir: /app
+    env_file:
+      - ./x402-registrar/.env
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:4020/health"]
       interval: 30s
       timeout: 5s
       retries: 3
@@ -35,4 +57,3 @@ services:
 networks:
   default:
     driver: bridge
-
