@@ -3,6 +3,7 @@ import { tool } from "@langchain/core/tools";
 import { z } from "zod";
 import fetch from "node-fetch";
 import { ChatOpenAI } from "@langchain/openai";
+import zkredId from "@zkred/agent-id";
 
 const writerModel = new ChatOpenAI({
   model: "gpt-4o-mini",
@@ -12,10 +13,37 @@ const writerModel = new ChatOpenAI({
 
 export const writerTool = tool(
   async ({ topic, style }: { topic: string; style: string }) => {
+    console.log(
+      "inside writer tool with topic = ",
+      topic,
+      " and style = ",
+      style
+    );
+    // Establish connection with researcher agent first
+    const initiateResponse = await zkredId.initiateHandshake(
+      process.env.INITIATOR_DID as string,
+      80002,
+      process.env.RECEIVER_DID as string,
+      80002
+    );
+
+    console.log("DATTT = ", initiateResponse);
+    const handshakeResult = await zkredId.copmleteHandshake(
+      process.env.INITIATORE_PRIVATE_KEY as string,
+      initiateResponse.sessionId.toString(),
+      initiateResponse.receiverAgentCallbackEndPoint,
+      initiateResponse.challenge
+    );
+
+    console.log("Handshake result ==> ", handshakeResult);
+
     // Step 1: Call the researcher agent for notes
     const researchRes = await fetch("http://localhost:8002/agent", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-session-id": initiateResponse?.sessionId?.toString(),
+      },
       body: JSON.stringify({ message: `Get wikipedia summary about ${topic}` }),
     });
 

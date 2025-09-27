@@ -56,6 +56,15 @@ app.post("/completeHandshake", async (req, res) => {
     // 1. Verify the signature using the initiator's public key
     // 2. Verify the challenge matches what we sent
     // 3. Store the initiator's public key for future communications
+    const isValid = await zkredId.verifySignature(
+      sessionId,
+      session.challenge,
+      signature,
+      session.did
+    );
+    if (!isValid) {
+      return res.status(401).json({ error: "Invalid signature" });
+    }
 
     // For now, we'll just store the public key and mark as verified
     session.verified = true;
@@ -79,6 +88,10 @@ app.post("/completeHandshake", async (req, res) => {
 // Original agent endpoint
 app.post("/agent", async (req, res) => {
   try {
+    const sessionId = req.headers["x-session-id"];
+    if (!sessionId) {
+      return res.status(401).json({ error: "Session ID is required" });
+    }
     const result = await agent.invoke({
       messages: [
         new SystemMessage(
@@ -88,6 +101,25 @@ app.post("/agent", async (req, res) => {
       ],
     });
 
+    res.send(result.messages[result.messages.length - 1].content);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error in writer agent");
+  }
+});
+
+app.post("/message", async (req, res) => {
+  try {
+    console.log("before calling");
+    const result = await agent.invoke({
+      messages: [
+        new SystemMessage(
+          "You are a writing agent. You can call a researcher agent for data, then create polished content."
+        ),
+        new HumanMessage(req.body.message),
+      ],
+    });
+    console.log("response");
     res.send(result.messages[result.messages.length - 1].content);
   } catch (err) {
     console.error(err);

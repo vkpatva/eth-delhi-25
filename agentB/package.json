@@ -16,6 +16,7 @@
     "@langchain/core": "^0.3.57",
     "@langchain/langgraph": "^0.3.0",
     "@langchain/openai": "^0.5.11",
+    "@zkred/agent-id": "^0.0.9",
     "axios": "^1.12.2",
     "express": "^5.1.0",
     "zod": "^3.25.49"
