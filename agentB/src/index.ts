@@ -7,7 +7,7 @@ import zkredId from "@zkred/agent-id";
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 8002;
+const port = process.env.PORT || 8003;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -84,7 +84,10 @@ app.post("/callback", async (req, res) => {
     if (!session) {
       return res.status(404).json({ error: "Session not found" });
     }
-
+    console.log("callback called", {
+      sessionId,
+      session: JSON.stringify(session),
+    });
     // In a real implementation, we would:
     // 1. Verify the signature using the initiator's public key
     // 2. Verify the challenge matches what we sent

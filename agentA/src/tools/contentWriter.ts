@@ -13,53 +13,59 @@ const writerModel = new ChatOpenAI({
 
 export const writerTool = tool(
   async ({ topic, style }: { topic: string; style: string }) => {
-    console.log(
-      "inside writer tool with topic = ",
-      topic,
-      " and style = ",
-      style
-    );
-    // Establish connection with researcher agent first
-    const initiateResponse = await zkredId.initiateHandshake(
-      process.env.INITIATOR_DID as string,
-      80002,
-      process.env.RECEIVER_DID as string,
-      80002
-    );
+    try {
+      console.log(
+        "inside writer tool with topic = ",
+        topic,
+        " and style = ",
+        style
+      );
+      // Establish connection with researcher agent first
+      const initiateResponse = await zkredId.initiateHandshake(
+        process.env.INITIATOR_DID as string,
+        296,
+        process.env.RECEIVER_DID as string,
+        80002
+      );
 
-    console.log("DATTT = ", initiateResponse);
-    const handshakeResult = await zkredId.copmleteHandshake(
-      process.env.INITIATORE_PRIVATE_KEY as string,
-      initiateResponse.sessionId.toString(),
-      initiateResponse.receiverAgentCallbackEndPoint,
-      initiateResponse.challenge
-    );
+      console.log("DATTT = ", initiateResponse);
+      const handshakeResult = await zkredId.copmleteHandshake(
+        process.env.INITIATOR_PRIVATE_KEY as string,
+        initiateResponse.sessionId.toString(),
+        initiateResponse.receiverAgentCallbackEndPoint,
+        initiateResponse.challenge
+      );
 
-    console.log("Handshake result ==> ", handshakeResult);
+      console.log("Handshake result ==> ", handshakeResult);
 
-    // Step 1: Call the researcher agent for notes
-    const researchRes = await fetch("http://localhost:8002/agent", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-session-id": initiateResponse?.sessionId?.toString(),
-      },
-      body: JSON.stringify({ message: `Get wikipedia summary about ${topic}` }),
-    });
+      // Step 1: Call the researcher agent for notes
+      const researchRes = await fetch("http://localhost:8003/agent", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-session-id": initiateResponse?.sessionId?.toString(),
+        },
+        body: JSON.stringify({
+          message: `Get wikipedia summary about ${topic}`,
+        }),
+      });
 
-    const notes = await researchRes.text();
+      const notes = await researchRes.text();
 
-    // Step 2: Use notes to generate polished content
-    const prompt = `
-      You are a skilled writer.
-      Write about "${topic}" using the following research notes:
-      ${notes}
+      // Step 2: Use notes to generate polished content
+      const prompt = `
+        You are a skilled writer.
+        Write about "${topic}" using the following research notes:
+        ${notes}
+  
+        Style: ${style}
+      `;
 
-      Style: ${style}
-    `;
-
-    const response = await writerModel.invoke(prompt);
-    return response.content;
+      const response = await writerModel.invoke(prompt);
+      return response.content;
+    } catch (err) {
+      console.log("Error in writer tool", err);
+    }
   },
   {
     name: "content_writer",
